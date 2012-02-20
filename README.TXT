@@ -1,3 +1,7 @@
+rails 3.1.3
+mongoid 2.4.4
+tire 0.3.12
+
 ######
 setup:
 
