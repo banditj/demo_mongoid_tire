@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DemoMongoidTire</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+Random: <%= rand(1..10000) %>
+<div id="flash">
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:error] %>
+  <p class="error"><%= flash[:error] %></p>
+<% end %>
+</div>
+<%= yield %>
+
+</body>
+</html>
