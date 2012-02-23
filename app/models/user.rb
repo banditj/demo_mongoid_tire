@@ -21,7 +21,7 @@ class User
     # get all products if search from elasticsearch else from db with pagination
   def self.get_users(search_str=nil, page=nil, per=nil)
     per||=Kaminari.config.default_per_page
-    if search_str && search_str.length >= 2
+    if (search_str && search_str.length >= 2)
       tire.search search_str, :per_page => per, :page => page
     else
       only(:username, :snumber, :fname, :lname).page(page).per(per)
