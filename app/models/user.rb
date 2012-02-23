@@ -3,21 +3,23 @@ class User
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  field :username,        :type => String
   field :snumber,         :type => Integer
-  field :lname,           :type => String
-  field :fname,           :type => String
   field :age,             :type => Integer
   field :income,          :type => Float
+
+  field :lname,           :type => String
+  field :fname,           :type => String
+  field :username,        :type => String
+
   field :birthday,        :type=>Date
 
   index :snumber, :unique=> true
   index :username, :unique=> true
 
-  validates_numericality_of :snumber, :age, :income
+  #validates_numericality_of :snumber, :age, :income
 
     # get all products if search from elasticsearch else from db with pagination
-  def self.get_users(search_str, page, per=nil)
+  def self.get_users(search_str=nil, page=nil, per=nil)
     per||=Kaminari.config.default_per_page
     if search_str && search_str.length >= 2
       tire.search search_str, :per_page => per, :page => page
