@@ -1,8 +1,8 @@
 ruby 1.9.3-p0
 
 rails 3.1.3
-mongoid 2.4.4
-tire 0.3.12
+mongoid 2.4.6
+tire -> master-branch
 
 ######
 setup:
@@ -20,8 +20,8 @@ using "," in number fields leads to untracked errors in elastic search.
 so the new created document silently won't be indexed.
 
 there are two problems:
-1) the mongoid bug, which turns 123,23 into a string, which won't get parsed by elastic search
-2) tire doesn't notice that the indexing of the document failed.
+1) the mongoid behavior, which turns 123,23 into a string, which won't get parsed by elastic search and makes it crash
+2) tire doesn't throw en exception when the indexing of the document failed but it logs 400 Bad Request.
 
 elasticsearch- error:
 [2012-02-20 22:59:03,364][DEBUG][action.index             ] [Challenger] [users][4], node[TMv3RdfYR7GSTNmxTFKfmw], [P], s[STARTED]: Failed to execute [index {[users][user][4f42c1fec98969ee6f000008], source[{"_id":"4f42c1fec98969ee6f000008","age":23.23,"birthday":null,"birthday(1i)":"2012","birthday(2i)":"2","birthday(3i)":"20","fname":"eee","income":"23,23","lname":"eee","snumber":23.23,"username":"eee"}]}]
@@ -47,7 +47,7 @@ Caused by: java.lang.NumberFormatException: For input string: "23,23"
         ... 11 more
 
 #BUG 2
-duplication error isn't rises when a user with the same "eee" username is being created
+duplication error doesnt rise when a user with the same "eee" username is being created
 for mongoid it looks like the user got saved. 
 AND tire does the indexing
 

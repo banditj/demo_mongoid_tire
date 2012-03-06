@@ -8,8 +8,7 @@ describe User do
     end
 
     it "should not set a string for age(integer) " do
-      @user_ok.age = "asdf"
-      @user_ok.should eq(nil)
+      lambda {@user_ok.age = "asdf"}.should raise_error
     end
 
     it "should not set a float for age" do
@@ -49,7 +48,6 @@ describe User do
     end
 
     it "should find user1 via tire" do
-      #binding.pry
       sleep 1
       User.get_users("user1").map(&:username).should eq ["user1"]
 
@@ -57,7 +55,6 @@ describe User do
 
     it "should find user2 via tire" do
       sleep 1
-      binding.pry
       User.get_users("user2").map(&:username).should eq ["user2"]
       # F because elasticsearch throughs an unnotice exception
       # see user 3

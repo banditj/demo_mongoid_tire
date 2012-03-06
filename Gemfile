@@ -5,7 +5,7 @@ gem 'rails', '3.1.3'
 gem 'bson_ext'
 gem 'mongoid'
 gem 'kaminari'
-gem 'tire'
+gem 'tire' , :git=>"https://github.com/karmi/tire.git"
 
 gem 'haml-rails'
 gem 'formtastic'
